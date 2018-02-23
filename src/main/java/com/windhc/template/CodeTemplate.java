@@ -5,7 +5,7 @@ package com.windhc.template;
  */
 public interface CodeTemplate {
 
-    String MAPPER_TEMPLATE = "package ${basePackage}.dao\n" +
+    String MAPPER_TEMPLATE = "package ${basePackage}.dao;\n" +
             "\n" +
             "import ${basePackage}.domain.${className};\n" +
             "import tk.mybatis.mapper.common.Mapper;\n" +

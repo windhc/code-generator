@@ -14,10 +14,6 @@ import com.windhc.template.CodeTemplate;
 import com.windhc.utils.FileUtil;
 import com.windhc.utils.FreeMarkerUtil;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,7 +39,6 @@ public class GeneratorAction extends AnAction {
             Messages.showMessageDialog("Can't found class name", "Error", Messages.getErrorIcon());
             return;
         }
-        Messages.showMessageDialog(className, "ClassName", Messages.getInformationIcon());
         LOGGER.info("className:" + className);
 
         String currentPath = getCurrentPath(anActionEvent);
@@ -53,28 +48,15 @@ public class GeneratorAction extends AnAction {
         }
         String basePath = currentPath.substring(0, currentPath.indexOf("domain/"));
         String basePackage = getPackageName(basePath);
-        Messages.showMessageDialog(basePackage, "BasePackage", Messages.getInformationIcon());
         LOGGER.info("basePackage:" + basePackage);
 
         // 生成代码文件
-        Map<String, String> params = new HashMap<>();
+        Map<String, String> params = new HashMap<>(2);
         params.put("basePackage", basePackage);
         params.put("className", className);
         String value = FreeMarkerUtil.getProcessValue(params, CodeTemplate.MAPPER_TEMPLATE);
-        FileUtil.writeToFile(basePath + "/dao", value);
-        Messages.showMessageDialog(value, "FTLvalue", Messages.getInformationIcon());
-        LOGGER.info("FTLvalue:" + value);
+        FileUtil.writeToFile(basePath + "/dao/" + className + "Mapper.java", value);
 
-//        String contractContent = String.format(CodeTemplate.CONTRACT_TEMPLATE, basePackage, className);
-//        WriteCommandAction.runWriteCommandAction(editor.getProject(), () -> editor.getDocument().setText(contractContent));
-//
-//        try {
-//            createPresenterClass(basePackage, basePath, className);
-//            createModelClass(basePackage, basePath, className);
-//        } catch (IOException e1) {
-//            Messages.showMessageDialog("create file failed", "Error", Messages.getErrorIcon());
-//            return;
-//        }
         Messages.showMessageDialog("created success! please wait a moment", "Success", Messages.getInformationIcon());
         refreshProject(anActionEvent);
     }
@@ -102,38 +84,6 @@ public class GeneratorAction extends AnAction {
             return;
         }
         project.getBaseDir().refresh(false, true);
-    }
-
-    private void createModelClass(String basePackage, String path, String modelName) throws IOException {
-        String dir = path + "model/" ;
-        String filePath = dir + modelName + "Model.java";
-        File dirs = new File(dir);
-        File file = new File(filePath);
-        if (!dirs.exists()) {
-            dirs.mkdirs();
-        }
-        file.createNewFile();
-        BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-        String content = String.format(CodeTemplate.MODEL_TEMPLATE, basePackage, modelName, modelName);
-        writer.write(content);
-        writer.flush();
-        writer.close();
-    }
-
-    private void createPresenterClass(String basePackage, String path, String modelName) throws IOException {
-        String dir = path + "presenter/";
-        String filePath = dir + modelName + "Presenter.java";
-        File dirs = new File(dir);
-        File file = new File(filePath);
-        if (!dirs.exists()) {
-            dirs.mkdirs();
-        }
-        file.createNewFile();
-        BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-        String content = String.format(CodeTemplate.PRESENTER_TEMPLATE, basePackage, modelName, modelName, modelName, modelName);
-        writer.write(content);
-        writer.flush();
-        writer.close();
     }
 
     private String getPackageName(String path) {

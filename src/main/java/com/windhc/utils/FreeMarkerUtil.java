@@ -27,17 +27,13 @@ public class FreeMarkerUtil {
     /**
      * 获取解析后的值.
      * @param params
-     * @param templatePath template全路径
+     * @param tpl template全路径
      * @return
      */
-    public static String getProcessValue(Map<String, String> params, String templatePath) {
+    public static String getProcessValue(Map<String, String> params, String tpl) {
         try {
-            Template template = new Template("template", new StringReader(templatePath), configuration);
-            LOGGER.info("template-templatePath-path:" + templatePath);
-//            if (template == null) {
-//                return null;
-//            }
-            LOGGER.info("template:" + template.getName());
+            LOGGER.info("template-tpl-path:" + tpl);
+            Template template = new Template("template", new StringReader(tpl), configuration);
             StringWriter sw = new StringWriter();
             template.process(params, sw);
             return sw.toString();
