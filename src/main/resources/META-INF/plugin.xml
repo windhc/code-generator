@@ -4,8 +4,8 @@
     <vendor email="jlkmddl@gmail.com" url="https://www.windhc.com">windhc</vendor>
 
     <description><![CDATA[
-    Enter short description for your plugin here.<br>
-    <em>most HTML tags may be used</em>
+    generator dao/service/controller<br>
+    <em>improve efficiency</em>
     ]]></description>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
@@ -19,6 +19,10 @@
     </extensions>
 
     <actions>
-        <!-- Add your actions here -->
+        <action id="pw.qlm.plugin.MVPGENERATOR" class="com.windhc.GeneratorAction" text="CodeGenerator"
+                description="help you to create mvc">
+            <add-to-group group-id="GenerateGroup" anchor="first"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="meta 1"/>
+        </action>
     </actions>
 </idea-plugin>
