@@ -5,20 +5,18 @@ package com.windhc.template;
  */
 public interface CodeTemplate {
 
-    String CONTRACT_TEMPLATE =
-            "package %s.contract;\n" +
-                    "\n" +
-                    "/**\n * Created by MvpGenerator.\n */\n" +
-                    "public interface %sContract {\n" +
-                    "interface View extends IView {\n" +
-                    "}\n" +
-                    "\n" +
-                    "interface Presenter extends IPresenter<View> {\n" +
-                    "}\n" +
-                    "\n" +
-                    "interface Model extends IModel {\n" +
-                    "}\n" +
-                    "}";
+    String MAPPER_TEMPLATE = "package ${basePackage}.dao\n" +
+            "\n" +
+            "import ${basePackage}.domain.${className};\n" +
+            "import tk.mybatis.mapper.common.Mapper;\n" +
+            "\n" +
+            "/**\n" +
+            " * @author windhc\n" +
+            " * @date ${.now}\n" +
+            " */\n" +
+            "public interface ${className}Mapper extends Mapper<${className}> {\n" +
+            "\n" +
+            "}";
 
     String PRESENTER_TEMPLATE = "package %s.presenter;\n" +
             "\n" +

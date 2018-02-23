@@ -4,28 +4,34 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.DataKeys;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
-import com.intellij.openapi.command.WriteCommandAction;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.windhc.template.CodeTemplate;
+import com.windhc.utils.FileUtil;
+import com.windhc.utils.FreeMarkerUtil;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author windhc
  */
 public class GeneratorAction extends AnAction {
 
+    private static final Logger LOGGER = Logger.getInstance(GeneratorAction.class);
+
     @Override
-    public void actionPerformed(AnActionEvent e) {
+    public void actionPerformed(AnActionEvent anActionEvent) {
         // 得到IDEA文本编辑器实例
-        Editor editor = e.getData(PlatformDataKeys.EDITOR);
+        Editor editor = anActionEvent.getData(PlatformDataKeys.EDITOR);
         if (editor == null) {
             return;
         }
@@ -38,28 +44,39 @@ public class GeneratorAction extends AnAction {
             return;
         }
         Messages.showMessageDialog(className, "ClassName", Messages.getInformationIcon());
+        LOGGER.info("className:" + className);
 
-        String currentPath = getCurrentPath(e);
+        String currentPath = getCurrentPath(anActionEvent);
         if (currentPath == null || !currentPath.contains("domain")) {
             Messages.showMessageDialog("Your Contract should in package 'domain'.", "Error", Messages.getErrorIcon());
             return;
         }
-        String basePath = currentPath.replace("contract/" + className + ".java", "");
+        String basePath = currentPath.substring(0, currentPath.indexOf("domain/"));
         String basePackage = getPackageName(basePath);
-        String modelName = className.substring(0, className.indexOf("Contract"));
+        Messages.showMessageDialog(basePackage, "BasePackage", Messages.getInformationIcon());
+        LOGGER.info("basePackage:" + basePackage);
 
-        String contractContent = String.format(CodeTemplate.CONTRACT_TEMPLATE, basePackage, modelName);
-        WriteCommandAction.runWriteCommandAction(editor.getProject(), () -> editor.getDocument().setText(contractContent));
+        // 生成代码文件
+        Map<String, String> params = new HashMap<>();
+        params.put("basePackage", basePackage);
+        params.put("className", className);
+        String value = FreeMarkerUtil.getProcessValue(params, CodeTemplate.MAPPER_TEMPLATE);
+        FileUtil.writeToFile(basePath + "/dao", value);
+        Messages.showMessageDialog(value, "FTLvalue", Messages.getInformationIcon());
+        LOGGER.info("FTLvalue:" + value);
 
-        try {
-            createPresenterClass(basePackage, basePath, modelName);
-            createModelClass(basePackage, basePath, modelName);
-        } catch (IOException e1) {
-            Messages.showMessageDialog("create file failed", "Error", Messages.getErrorIcon());
-            return;
-        }
+//        String contractContent = String.format(CodeTemplate.CONTRACT_TEMPLATE, basePackage, className);
+//        WriteCommandAction.runWriteCommandAction(editor.getProject(), () -> editor.getDocument().setText(contractContent));
+//
+//        try {
+//            createPresenterClass(basePackage, basePath, className);
+//            createModelClass(basePackage, basePath, className);
+//        } catch (IOException e1) {
+//            Messages.showMessageDialog("create file failed", "Error", Messages.getErrorIcon());
+//            return;
+//        }
         Messages.showMessageDialog("created success! please wait a moment", "Success", Messages.getInformationIcon());
-        refreshProject(e);
+        refreshProject(anActionEvent);
     }
 
     /**
@@ -75,6 +92,10 @@ public class GeneratorAction extends AnAction {
         return null;
     }
 
+    /**
+     * 刷新项目
+     * @param e AnActionEvent
+     */
     private void refreshProject(AnActionEvent e) {
         Project project = e.getProject();
         if (project == null) {
