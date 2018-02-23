@@ -1,6 +1,6 @@
 <idea-plugin>
     <id>windhc.code-generator</id>
-    <name>code-generator</name>
+    <name>Custom Code Generator</name>
     <vendor email="jlkmddl@gmail.com" url="https://www.windhc.com">windhc</vendor>
 
     <description><![CDATA[

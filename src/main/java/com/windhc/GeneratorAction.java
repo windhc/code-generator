@@ -5,6 +5,7 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.DataKeys;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.command.WriteCommandAction;
+import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
@@ -23,19 +24,24 @@ public class GeneratorAction extends AnAction {
 
     @Override
     public void actionPerformed(AnActionEvent e) {
+        // 得到IDEA文本编辑器实例
         Editor editor = e.getData(PlatformDataKeys.EDITOR);
         if (editor == null) {
             return;
         }
-        String content = editor.getDocument().getText();
+        Document document = editor.getDocument();
+        String content = document.getText();
+
         String className = getClassName(content);
         if (className == null) {
-            Messages.showMessageDialog("Create failed ,Can't found 'Contract' in your class name,your class name must contain 'Contract'", "Error", Messages.getErrorIcon());
+            Messages.showMessageDialog("Can't found class name", "Error", Messages.getErrorIcon());
             return;
         }
+        Messages.showMessageDialog(className, "ClassName", Messages.getInformationIcon());
+
         String currentPath = getCurrentPath(e);
-        if (currentPath == null || !currentPath.contains("contract")) {
-            Messages.showMessageDialog("Your Contract should in package 'contract'.", "Error", Messages.getErrorIcon());
+        if (currentPath == null || !currentPath.contains("domain")) {
+            Messages.showMessageDialog("Your Contract should in package 'domain'.", "Error", Messages.getErrorIcon());
             return;
         }
         String basePath = currentPath.replace("contract/" + className + ".java", "");
@@ -56,11 +62,14 @@ public class GeneratorAction extends AnAction {
         refreshProject(e);
     }
 
+    /**
+     * 获取类名
+     */
     private String getClassName(String content) {
         String[] words = content.split(" ");
-        for (String word : words) {
-            if (word.contains("Contract")) {
-                return word;
+        for (int i = 0; i < words.length; i++) {
+            if (words[i].equals("class")) {
+                return words[i+1];
             }
         }
         return null;
