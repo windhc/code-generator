@@ -19,7 +19,7 @@
     </extensions>
 
     <actions>
-        <action id="pw.qlm.plugin.MVPGENERATOR" class="com.windhc.GeneratorAction" text="CodeGenerator"
+        <action id="com.windhc.plugin.CODE-GENERATOR" class="com.windhc.GeneratorAction" text="CodeGenerator"
                 description="help you to create mvc">
             <add-to-group group-id="GenerateGroup" anchor="first"/>
             <keyboard-shortcut keymap="$default" first-keystroke="meta 1"/>
