@@ -16,7 +16,7 @@ public class FreeMarkerUtil {
 
     private static final Logger LOGGER = Logger.getInstance(FreeMarkerUtil.class);
 
-    public static Configuration configuration;
+    private static Configuration configuration;
 
     static {
         configuration = new Configuration(Configuration.VERSION_2_3_23);

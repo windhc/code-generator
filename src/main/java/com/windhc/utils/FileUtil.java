@@ -37,9 +37,7 @@ public class FileUtil {
 
     /**
      * 获得字串的CRC32校验和
-     *
-     * @param string
-     *            要进行校验的字串
+     * @param string 要进行校验的字串
      * @return
      * @throws Exception
      */
@@ -68,7 +66,6 @@ public class FileUtil {
 
     /**
      * 写字串到文件中，若文件不存在，则建立新文件
-     *
      * @param filePath 需要写的文件的路径
      * @param data 需要写入的字串
      * @param encoding 文件编码，默认为UTF-8
@@ -109,7 +106,6 @@ public class FileUtil {
 
     /**
      * 判断特定的路径是否为目录
-     *
      * @param filePath 文件完整的路径
      * @return 若是目录，则返回true，否则返回false
      */
@@ -120,10 +116,8 @@ public class FileUtil {
 
     /**
      * 更改文件的名称，若不在同一个目录下,则系统会移动文件
-     * @param srcFile
-     *            源文件路径名称
-     * @param destFile
-     *            目的文件路径名称
+     * @param srcFile 源文件路径名称
+     * @param destFile 目的文件路径名称
      * @return
      */
     public static boolean renameTo(String srcFile, String destFile) {

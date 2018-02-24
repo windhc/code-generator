@@ -5,6 +5,9 @@ package com.windhc.template;
  */
 public interface CodeTemplate {
 
+    /**
+     * same as mapper.ftl
+     */
     String MAPPER_TEMPLATE = "package ${basePackage}.dao;\n" +
             "\n" +
             "import ${basePackage}.domain.${className};\n" +
@@ -18,6 +21,9 @@ public interface CodeTemplate {
             "\n" +
             "}";
 
+    /**
+     * same as service.ftl
+     */
     String SERVICE_TEMPLATE = "package ${basePackage}.service;\n" +
             "\n" +
             "import java.util.List;\n" +
@@ -62,6 +68,9 @@ public interface CodeTemplate {
             "    }\n" +
             "}\n";
 
+    /**
+     * same as web.ftl
+     */
     String WEB_TEMPLATE = "package ${basePackage}.web;\n" +
             "\n" +
             "import com.github.pagehelper.PageInfo;\n" +

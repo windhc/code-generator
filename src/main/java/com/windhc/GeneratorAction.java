@@ -99,7 +99,8 @@ public class GeneratorAction extends AnAction {
         boolean packageBegin = false;
         for (int i = 0; i < strings.length; i++) {
             String string = strings[i];
-            if ((string.equals("com")) || (string.equals("org")) || (string.equals("cn"))) {
+            if ("com".equals(string) || "org".equals(string) || "cn".equals(string) || "net".equals(string)
+                    || "cc".equals(string) || "info".equals(string)) {
                 packageBegin = true;
             }
             if (packageBegin) {
