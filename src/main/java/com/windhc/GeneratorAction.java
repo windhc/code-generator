@@ -54,15 +54,27 @@ public class GeneratorAction extends AnAction {
         Map<String, String> params = new HashMap<>(2);
         params.put("basePackage", basePackage);
         params.put("className", className);
+
         // 生成dao文件
         String value = FreeMarkerUtil.getProcessValue(params, CodeTemplate.MAPPER_TEMPLATE);
-        FileUtil.writeToFile(basePath + "/dao/" + className + "Mapper.java", value);
+        String daoFilePath = basePath + "/dao/" + className + "Mapper.java";
+        if (!FileUtil.exists(daoFilePath)) {
+            FileUtil.writeToFile(daoFilePath, value);
+        }
+
         // 生成service文件
         value = FreeMarkerUtil.getProcessValue(params, CodeTemplate.SERVICE_TEMPLATE);
-        FileUtil.writeToFile(basePath + "/service/" + className + "Service.java", value);
+        String serviceFilePath = basePath + "/service/" + className + "Service.java";
+        if (!FileUtil.exists(serviceFilePath)) {
+            FileUtil.writeToFile(serviceFilePath, value);
+        }
+
         // 生成web文件
         value = FreeMarkerUtil.getProcessValue(params, CodeTemplate.WEB_TEMPLATE);
-        FileUtil.writeToFile(basePath + "/web/" + className + "Controller.java", value);
+        String webFilePath = basePath + "/web/" + className + "Controller.java";
+        if (!FileUtil.exists(webFilePath)) {
+            FileUtil.writeToFile(webFilePath, value);
+        }
 
         Messages.showMessageDialog("created success! please wait a moment", "Success", Messages.getInformationIcon());
         refreshProject(anActionEvent);

@@ -87,7 +87,7 @@ public class FileUtil {
     /**
      * 判断文件和目录是否已存在
      * @param filePath 文件和目录完整路径
-     * @return tru:存在 false：不存在
+     * @return true:存在 false:不存在
      */
     public static boolean exists(String filePath) {
         File file = new File(filePath);
