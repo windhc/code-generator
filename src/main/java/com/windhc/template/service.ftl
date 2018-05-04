@@ -33,7 +33,7 @@ public class ${className}Service {
     }
 
     public void update(${className} ${className?lower_case}) {
-        addressMapper.updateByPrimaryKeySelective(${className?lower_case});
+        ${className?lower_case}Mapper.updateByPrimaryKeySelective(${className?lower_case});
     }
 
     public ${className} findById(Long id) {
