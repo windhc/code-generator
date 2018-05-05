@@ -21,23 +21,23 @@ public class ${className}Service {
     private static final Logger LOGGER = LoggerFactory.getLogger(${className}Service.class);
 
     @Autowired
-    private ${className}Mapper ${className?lower_case}Mapper;
+    private ${className}Mapper ${className?uncap_first}Mapper;
 
-    public void save(${className} ${className?lower_case}) {
-        ${className?lower_case}Mapper.insertSelective(${className?lower_case});
+    public void save(${className} ${className?uncap_first}) {
+        ${className?uncap_first}Mapper.insertSelective(${className?uncap_first});
     }
 
     public void delete(Long id) {
         LOGGER.info("根据ID删除:{}", id);
-        ${className?lower_case}Mapper.deleteByPrimaryKey(id);
+        ${className?uncap_first}Mapper.deleteByPrimaryKey(id);
     }
 
-    public void update(${className} ${className?lower_case}) {
-        ${className?lower_case}Mapper.updateByPrimaryKeySelective(${className?lower_case});
+    public void update(${className} ${className?uncap_first}) {
+        ${className?uncap_first}Mapper.updateByPrimaryKeySelective(${className?uncap_first});
     }
 
     public ${className} findById(Long id) {
         LOGGER.info("根据ID查询详情:{}", id);
-        return ${className?lower_case}Mapper.selectByPrimaryKey(id);
+        return ${className?uncap_first}Mapper.selectByPrimaryKey(id);
     }
 }

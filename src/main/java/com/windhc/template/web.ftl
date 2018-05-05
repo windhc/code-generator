@@ -13,30 +13,30 @@ import java.util.List;
  * @date ${.now}
  */
 @RestController
-@RequestMapping("/web/${className?lower_case}s")
+@RequestMapping("/web/${className?uncap_first}s")
 public class ${className}Controller {
 
     @Autowired
-    private ${className}Service ${className?lower_case}Service;
+    private ${className}Service ${className?uncap_first}Service;
 
     @PostMapping("")
-    public void save(@RequestBody ${className} ${className?lower_case}) {
-        ${className?lower_case}Service.save(${className?lower_case});
+    public void save(@RequestBody ${className} ${className?uncap_first}) {
+        ${className?uncap_first}Service.save(${className?uncap_first});
     }
 
     @PutMapping("")
-    public void update(@RequestBody ${className} ${className?lower_case}) {
-        ${className?lower_case}Service.update(${className?lower_case});
+    public void update(@RequestBody ${className} ${className?uncap_first}) {
+        ${className?uncap_first}Service.update(${className?uncap_first});
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
-        ${className?lower_case}Service.delete(id);
+        ${className?uncap_first}Service.delete(id);
     }
 
     @GetMapping("/{id}")
     public ${className} get${className}(@PathVariable Long id) {
-        return ${className?lower_case}Service.findById(id);
+        return ${className?uncap_first}Service.findById(id);
     }
 
 }
