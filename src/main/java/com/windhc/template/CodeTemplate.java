@@ -8,7 +8,7 @@ public interface CodeTemplate {
     /**
      * same as mapper.ftl
      */
-    String MAPPER_TEMPLATE = "package ${basePackage}.dao\n" +
+    String MAPPER_TEMPLATE = "package ${basePackage}.dao;\n" +
             "\n" +
             "import ${basePackage}.domain.${className};\n" +
             "import org.apache.ibatis.annotations.Mapper;\n" +

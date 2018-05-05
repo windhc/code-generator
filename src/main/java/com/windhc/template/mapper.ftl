@@ -1,4 +1,4 @@
-package ${basePackage}.dao
+package ${basePackage}.dao;
 
 import ${basePackage}.domain.${className};
 import org.apache.ibatis.annotations.Mapper;
