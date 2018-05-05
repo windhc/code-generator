@@ -21,7 +21,7 @@
     <actions>
         <action id="com.windhc.plugin.CODE-GENERATOR" class="com.windhc.GeneratorAction" text="CodeGenerator"
                 description="help you to create mvc">
-            <add-to-group group-id="GenerateGroup" anchor="first"/>
+            <add-to-group group-id="GenerateGroup" anchor="last"/>
             <keyboard-shortcut keymap="$default" first-keystroke="meta 1"/>
         </action>
     </actions>
