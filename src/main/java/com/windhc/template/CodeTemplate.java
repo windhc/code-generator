@@ -8,16 +8,17 @@ public interface CodeTemplate {
     /**
      * same as mapper.ftl
      */
-    String MAPPER_TEMPLATE = "package ${basePackage}.dao;\n" +
+    String MAPPER_TEMPLATE = "package ${basePackage}.dao\n" +
             "\n" +
             "import ${basePackage}.domain.${className};\n" +
-            "import tk.mybatis.mapper.common.Mapper;\n" +
+            "import org.apache.ibatis.annotations.Mapper;\n" +
             "\n" +
             "/**\n" +
             " * @author windhc\n" +
             " * @date ${.now}\n" +
             " */\n" +
-            "public interface ${className}Mapper extends Mapper<${className}> {\n" +
+            "@Mapper\n" +
+            "public interface ${className}Mapper extends tk.mybatis.mapper.common.Mapper<${className}> {\n" +
             "\n" +
             "}";
 
@@ -47,24 +48,24 @@ public interface CodeTemplate {
             "    private static final Logger LOGGER = LoggerFactory.getLogger(${className}Service.class);\n" +
             "\n" +
             "    @Autowired\n" +
-            "    private ${className}Mapper ${className?lower_case}Mapper;\n" +
+            "    private ${className}Mapper ${className?uncap_first}Mapper;\n" +
             "\n" +
-            "    public void save(${className} ${className?lower_case}) {\n" +
-            "        ${className?lower_case}Mapper.insertSelective(${className?lower_case});\n" +
+            "    public void save(${className} ${className?uncap_first}) {\n" +
+            "        ${className?uncap_first}Mapper.insertSelective(${className?uncap_first});\n" +
             "    }\n" +
             "\n" +
             "    public void delete(Long id) {\n" +
             "        LOGGER.info(\"根据ID删除:{}\", id);\n" +
-            "        ${className?lower_case}Mapper.deleteByPrimaryKey(id);\n" +
+            "        ${className?uncap_first}Mapper.deleteByPrimaryKey(id);\n" +
             "    }\n" +
             "\n" +
-            "    public void update(${className} ${className?lower_case}) {\n" +
-            "        addressMapper.updateByPrimaryKeySelective(${className?lower_case});\n" +
+            "    public void update(${className} ${className?uncap_first}) {\n" +
+            "        ${className?uncap_first}Mapper.updateByPrimaryKeySelective(${className?uncap_first});\n" +
             "    }\n" +
             "\n" +
             "    public ${className} findById(Long id) {\n" +
             "        LOGGER.info(\"根据ID查询详情:{}\", id);\n" +
-            "        return ${className?lower_case}Mapper.selectByPrimaryKey(id);\n" +
+            "        return ${className?uncap_first}Mapper.selectByPrimaryKey(id);\n" +
             "    }\n" +
             "}\n";
 
@@ -86,30 +87,30 @@ public interface CodeTemplate {
             " * @date ${.now}\n" +
             " */\n" +
             "@RestController\n" +
-            "@RequestMapping(\"/web/${className?lower_case}s\")\n" +
+            "@RequestMapping(\"/web/${className?uncap_first}s\")\n" +
             "public class ${className}Controller {\n" +
             "\n" +
             "    @Autowired\n" +
-            "    private ${className}Service ${className?lower_case}Service;\n" +
+            "    private ${className}Service ${className?uncap_first}Service;\n" +
             "\n" +
             "    @PostMapping(\"\")\n" +
-            "    public void save(@RequestBody ${className} ${className?lower_case}) {\n" +
-            "        ${className?lower_case}Service.save(${className?lower_case});\n" +
+            "    public void save(@RequestBody ${className} ${className?uncap_first}) {\n" +
+            "        ${className?uncap_first}Service.save(${className?uncap_first});\n" +
             "    }\n" +
             "\n" +
             "    @PutMapping(\"\")\n" +
-            "    public void update(@RequestBody ${className} ${className?lower_case}) {\n" +
-            "        ${className?lower_case}Service.update(${className?lower_case});\n" +
+            "    public void update(@RequestBody ${className} ${className?uncap_first}) {\n" +
+            "        ${className?uncap_first}Service.update(${className?uncap_first});\n" +
             "    }\n" +
             "\n" +
             "    @DeleteMapping(\"/{id}\")\n" +
             "    public void delete(@PathVariable Long id) {\n" +
-            "        ${className?lower_case}Service.delete(id);\n" +
+            "        ${className?uncap_first}Service.delete(id);\n" +
             "    }\n" +
             "\n" +
             "    @GetMapping(\"/{id}\")\n" +
             "    public ${className} get${className}(@PathVariable Long id) {\n" +
-            "        return ${className?lower_case}Service.findById(id);\n" +
+            "        return ${className?uncap_first}Service.findById(id);\n" +
             "    }\n" +
             "\n" +
             "}\n";
