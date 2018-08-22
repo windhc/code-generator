@@ -1,5 +1,5 @@
 plugins {
-    id 'org.jetbrains.intellij' version '0.3.1'
+    id "org.jetbrains.intellij" version "0.3.6"
 }
 
 group 'code-generator'
@@ -25,7 +25,7 @@ dependencies {
 }
 
 intellij {
-    version '2018.1.2'
+    version '2018.2.2'
 }
 patchPluginXml {
     changeNotes """
