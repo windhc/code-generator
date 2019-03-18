@@ -10,7 +10,7 @@ public interface CodeTemplate {
      */
     String MAPPER_TEMPLATE = "package ${basePackage}.dao;\n" +
             "\n" +
-            "import ${basePackage}.domain.${className};\n" +
+            "import ${domainPackage}.${className};\n" +
             "import org.apache.ibatis.annotations.Mapper;\n" +
             "\n" +
             "/**\n" +

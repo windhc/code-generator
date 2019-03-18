@@ -47,11 +47,17 @@ public class GeneratorAction extends AnAction {
             return;
         }
         String basePath = currentPath.substring(0, currentPath.indexOf("domain/"));
+        LOGGER.info("currentPath:" + currentPath);
+        LOGGER.info("basePath:" + basePath);
+        Messages.showMessageDialog(currentPath, "CurrentPath", Messages.getInformationIcon());
+        Messages.showMessageDialog(basePath, "BasePath", Messages.getInformationIcon());
         String basePackage = getPackageName(basePath);
+        String domainPackage = getPackageName(currentPath);
         LOGGER.info("basePackage:" + basePackage);
 
         // 生成代码文件
-        Map<String, String> params = new HashMap<>(2);
+        Map<String, String> params = new HashMap<>(3);
+        params.put("domainPackage", domainPackage);
         params.put("basePackage", basePackage);
         params.put("className", className);
 

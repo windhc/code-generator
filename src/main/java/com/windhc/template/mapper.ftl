@@ -1,6 +1,6 @@
 package ${basePackage}.dao;
 
-import ${basePackage}.domain.${className};
+import ${domainPackage}.${className};
 import org.apache.ibatis.annotations.Mapper;
 
 /**
