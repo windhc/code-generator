@@ -49,11 +49,10 @@ public class GeneratorAction extends AnAction {
         String basePath = currentPath.substring(0, currentPath.indexOf("domain/"));
         LOGGER.info("currentPath:" + currentPath);
         LOGGER.info("basePath:" + basePath);
-        Messages.showMessageDialog(currentPath, "CurrentPath", Messages.getInformationIcon());
-        Messages.showMessageDialog(basePath, "BasePath", Messages.getInformationIcon());
         String basePackage = getPackageName(basePath);
-        String domainPackage = getPackageName(currentPath);
+        String domainPackage = getPackageName(currentPath.substring(0, currentPath.indexOf(".java")));
         LOGGER.info("basePackage:" + basePackage);
+        LOGGER.info("domainPackage:" + domainPackage);
 
         // 生成代码文件
         Map<String, String> params = new HashMap<>(3);

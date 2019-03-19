@@ -36,7 +36,7 @@ public interface CodeTemplate {
             "import com.github.pagehelper.PageInfo;\n" +
             "\n" +
             "import ${basePackage}.dao.${className}Mapper;\n" +
-            "import ${basePackage}.domain.${className};\n" +
+            "import ${domainPackage}.${className};\n" +
             "\n" +
             "/**\n" +
             " * @author windhc\n" +
@@ -75,7 +75,7 @@ public interface CodeTemplate {
     String WEB_TEMPLATE = "package ${basePackage}.web;\n" +
             "\n" +
             "import com.github.pagehelper.PageInfo;\n" +
-            "import ${basePackage}.domain.${className};\n" +
+            "import ${domainPackage}.${className};\n" +
             "import ${basePackage}.service.${className}Service;\n" +
             "import org.springframework.beans.factory.annotation.Autowired;\n" +
             "import org.springframework.web.bind.annotation.*;\n" +
