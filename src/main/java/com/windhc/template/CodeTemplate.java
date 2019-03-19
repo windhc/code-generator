@@ -10,7 +10,7 @@ public interface CodeTemplate {
      */
     String MAPPER_TEMPLATE = "package ${basePackage}.dao;\n" +
             "\n" +
-            "import ${domainPackage}.${className};\n" +
+            "import ${domainPackage};\n" +
             "import org.apache.ibatis.annotations.Mapper;\n" +
             "\n" +
             "/**\n" +
@@ -36,7 +36,7 @@ public interface CodeTemplate {
             "import com.github.pagehelper.PageInfo;\n" +
             "\n" +
             "import ${basePackage}.dao.${className}Mapper;\n" +
-            "import ${domainPackage}.${className};\n" +
+            "import ${domainPackage};\n" +
             "\n" +
             "/**\n" +
             " * @author windhc\n" +
@@ -75,7 +75,7 @@ public interface CodeTemplate {
     String WEB_TEMPLATE = "package ${basePackage}.web;\n" +
             "\n" +
             "import com.github.pagehelper.PageInfo;\n" +
-            "import ${domainPackage}.${className};\n" +
+            "import ${domainPackage};\n" +
             "import ${basePackage}.service.${className}Service;\n" +
             "import org.springframework.beans.factory.annotation.Autowired;\n" +
             "import org.springframework.web.bind.annotation.*;\n" +

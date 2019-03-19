@@ -9,7 +9,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import ${basePackage}.dao.${className}Mapper;
-import ${domainPackage}.${className};
+import ${domainPackage};
 
 /**
  * @author windhc

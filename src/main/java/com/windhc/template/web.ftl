@@ -1,7 +1,7 @@
 package ${basePackage}.web;
 
 import com.github.pagehelper.PageInfo;
-import ${domainPackage}.${className};
+import ${domainPackage};
 import ${basePackage}.service.${className}Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
